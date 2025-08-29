@@ -2,16 +2,16 @@ package br.com.projetojsf;
 
 import javax.faces.bean.ManagedBean;
 
-@ManagedBean(name = "pessoabean")
+@ManagedBean(name = "pessoaBean")
 public class PessoaBean  {
 
-	private String name;
+	private String nome;
 	private String sobrenome;
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String name) {
+		this.nome = name;
 	}
 	public String getSobrenome() {
 		return sobrenome;
