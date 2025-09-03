@@ -25,4 +25,15 @@ public class DaoGeneric<O> {
 		entityManager.close();
 		return retorno;
 	}
+	
+	public void deletePorId(O entidade) {
+		EntityManager entityManager = JPAUtil.getEntityManager();
+		EntityTransaction entityTransaction = entityManager.getTransaction();
+		entityTransaction.begin();
+		Object id = JPAUtil.getPrimaryKey(entidade);
+		entityManager.createQuery("delete from "+ entidade.getClass().getCanonicalName() + "where id = " + id).executeUpdate();
+		entityTransaction.commit();
+		entityManager.close();
+		
+	}
 }
