@@ -1,38 +1,45 @@
 package br.com.projetojsf;
 
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
 
+
+import br.com.dao.DaoGeneric;
+import br.com.entidade.Pessoa;
+
+@javax.faces.bean.ViewScoped
 @ManagedBean(name = "pessoaBean")
-public class PessoaBean  {
+public class PessoaBean implements Serializable  {
 
-	private String nome;
-	private String sobrenome;
-	private String nomeCompleto;
 	
-	public String mostrarNome() {
-		nomeCompleto = nome + " " + sobrenome;
-		return "";
+	private static final long serialVersionUID = 1L;
+	private Pessoa pessoa = new Pessoa();
+	private DaoGeneric<Pessoa> daoGeneric = new DaoGeneric<Pessoa>();
+	
+	public void salvar() {
+		pessoa = daoGeneric.merge(pessoa);
+		
 	}
 	
-	public String getNomeCompleto() {
-		return nomeCompleto;
+	public void novo() {
+		pessoa = new Pessoa();
 	}
 
-	public void setNomeCompleto(String nomeCompleto) {
-		this.nomeCompleto = nomeCompleto;
+	public Pessoa getPessoa() {
+		return pessoa;
 	}
 
-	public String getNome() {
-		return nome;
+	public void setPessoa(Pessoa pessoa) {
+		this.pessoa = pessoa;
 	}
-	public void setNome(String name) {
-		this.nome = name;
+
+	public DaoGeneric<Pessoa> getDaoGeneric() {
+		return daoGeneric;
 	}
-	public String getSobrenome() {
-		return sobrenome;
-	}
-	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
+
+	public void setDaoGeneric(DaoGeneric<Pessoa> daoGeneric) {
+		this.daoGeneric = daoGeneric;
 	}
 	
 }

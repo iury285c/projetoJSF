@@ -13,14 +13,20 @@
 <h:body>
 
 	<h:form>
-		<h:inputText id="campoNome" value="#{pessoaBean.nome}"></h:inputText>
+	
+	    <h:inputText id="campoId" value="#{pessoaBean.pessoa.id}" readonly="true"></h:inputText>
+	    <br/>
+		<h:inputText id="campoNome" value="#{pessoaBean.pessoa.nome}"></h:inputText>
 		<br />
 
-		<h:inputText id="sobrenome" value="#{pessoaBean.sobrenome}"></h:inputText>
+		<h:inputText id="sobrenome" value="#{pessoaBean.pessoa.sobrenome}"></h:inputText>
 		<br />
-		<h:outputText value="#{pessoaBean.nomeCompleto}"></h:outputText>
+		<h:inputText id="idade" value="#{pessoaBean.pessoa.idade}"></h:inputText>
 		<br/>
-		<h:commandButton value="Mostrar Nome" action="#{pessoaBean.mostrarNome}"></h:commandButton>
+		<br/>
+		<h:commandButton value="Novo" action="#{pessoaBean.novo}"></h:commandButton>
+		<h:commandButton value="Salvar" action="#{pessoaBean.salvar}"></h:commandButton>
+		
 
 	</h:form>
 
