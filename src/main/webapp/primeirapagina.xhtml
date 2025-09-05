@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html">
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <h:head>
 
@@ -11,7 +12,9 @@
 
 
 <h:body>
-
+     
+     
+     
 	<h:form>
 	
 	    <h:inputText id="campoId" value="#{pessoaBean.pessoa.id}" readonly="true"></h:inputText>
@@ -41,7 +44,16 @@
 		<h:column>
 		   <h:outputText value="#{pessoa.idade}"></h:outputText>
 		</h:column>
-		
+		<h:column>
+		  <h:commandLink value="Editar">
+		     <f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"></f:setPropertyActionListener>
+		  </h:commandLink>
+		</h:column>
+		<h:column>
+		  <h:commandLink value="Deletar" action="#{pessoaBean.deletar}">
+		     <f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"></f:setPropertyActionListener>
+		  </h:commandLink>
+		</h:column>
 		
 		</h:dataTable>
 		
