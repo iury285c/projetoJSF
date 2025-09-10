@@ -34,12 +34,21 @@
 		<h:outputLabel value="IDADE"/>
 		<h:inputText id="idade" value="#{pessoaBean.pessoa.idade}"></h:inputText>
 		
-		<h:outputLabel value="sexo"/>
 		
+		<h:outputLabel value="sexo"/>
 		<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}">
 		<f:selectItem itemLabel="[-Selecione-]" noSelectionOption="true"/>
 		 <f:selectItem itemValue="MASCULINO" itemLabel="Masculino"/>
 		 <f:selectItem itemValue="FEMININO" itemLabel="Feminino"/>
+		</h:selectOneMenu>
+		
+		<h:outputLabel value="Perfil"/>
+		<h:selectOneMenu id="campoPerfil" value="#{pessoaBean.pessoa.perfilUser}">
+		<f:selectItem itemLabel="[-Selecione-]" noSelectionOption="true"/>
+		 <f:selectItem itemValue="DEV BACK-END" itemLabel="DEV BACK-END"/>
+		 <f:selectItem itemValue="DEV FRONT-END" itemLabel="DEV FRONT-END"/>
+		 <f:selectItem itemValue="ARQUITETO DE SISTEMA" itemLabel="ARQUITETO DE SISTEMA"/>
+		 <f:selectItem itemValue="ENGENHEIRO DE SISTEMA" itemLabel="ENGENHEIRO DE SISTEMA"/>
 		</h:selectOneMenu>
 		
 		<h:outputLabel value="Frameworks:"/>
@@ -97,6 +106,10 @@
 		<h:column>
 		   <f:facet name="header">FRAMEWORKS</f:facet>
 		   <h:outputText value="#{pessoa.frameworks}"></h:outputText>
+		</h:column>
+		<h:column>
+		   <f:facet name="header">PERFIL</f:facet>
+		   <h:outputText value="#{pessoa.perfilUser}"></h:outputText>
 		</h:column>
 		<h:column>
 		   <f:facet name="header">ATIVO</f:facet>
