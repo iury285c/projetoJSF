@@ -34,12 +34,35 @@
 		<h:outputLabel value="IDADE"/>
 		<h:inputText id="idade" value="#{pessoaBean.pessoa.idade}"></h:inputText>
 		
+		<h:outputLabel value="sexo"/>
+		
+		<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}">
+		<f:selectItem itemLabel="[-Selecione-]" noSelectionOption="true"/>
+		 <f:selectItem itemValue="MASCULINO" itemLabel="Masculino"/>
+		 <f:selectItem itemValue="FEMININO" itemLabel="Feminino"/>
+		</h:selectOneMenu>
+		
+		<h:outputLabel value="Frameworks:"/>
+		<h:selectManyMenu id="campoFrameworks" style="height:150px; width:150px;" 
+		 value="#{pessoaBean.pessoa.frameworks}">
+		  <f:selectItem itemValue="Hibernate"/>
+		  <f:selectItem itemValue="JSF"/>
+		  <f:selectItem itemValue="Spring MVC"/>
+		  <f:selectItem itemValue="JSP"/>
+		  <f:selectItem itemValue="REACT"/>
+		  <f:selectItem itemValue="Angula"/>
+		  <f:selectItem itemValue="K8S"/>
+		</h:selectManyMenu>
+		
+		<h:outputLabel value="Ativo"/>
+		<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
 		
 		<h:outputLabel/>
 		<h:panelGroup>
-		<h:commandButton value="Novo" action="#{pessoaBean.novo}"></h:commandButton>
-		<h:commandButton value="Salvar" action="#{pessoaBean.salvar}"></h:commandButton>
-		<h:commandButton value="Deletar" action="#{pessoaBean.deletar}"></h:commandButton>
+		<h:commandButton value="Novo" action="#{pessoaBean.novo}" image="resources/img/btnNovo.png" title="Novo"/>
+		<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" image="resources/img/btnSalvar.png" title="Salvar"/>
+		<h:commandButton value="Deletar" action="#{pessoaBean.deletar}" image="resources/img/btnDeletar.png" title="Excluir"/>
+		<h:commandButton value="Limpar" type="reset" image="resources/img/btnLimpar.png" title="Limpar"/>
 		</h:panelGroup>
 		
 		</h:panelGrid>
@@ -68,15 +91,30 @@
 		   <h:outputText value="#{pessoa.idade}"></h:outputText>
 		</h:column>
 		<h:column>
+		   <f:facet name="header">SEXO</f:facet>
+		   <h:outputText value="#{pessoa.sexo}"></h:outputText>
+		</h:column>
+		<h:column>
+		   <f:facet name="header">FRAMEWORKS</f:facet>
+		   <h:outputText value="#{pessoa.frameworks}"></h:outputText>
+		</h:column>
+		<h:column>
+		   <f:facet name="header">ATIVO</f:facet>
+		   <h:outputText value="#{pessoa.ativo}"></h:outputText>
+		</h:column>
+		
+		<h:column>
 		  <f:facet name="header">EDITAR</f:facet>
-		  <h:commandLink value="Editar">
-		     <f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"></f:setPropertyActionListener>
+		  <h:commandLink title="Editar">
+		     <f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"/>
+		     <h:graphicImage value="resources/img/btnEditar.png"/>
 		  </h:commandLink>
 		</h:column>
 		<h:column>
 		  <f:facet name="header">DELETAR</f:facet>
-		  <h:commandLink value="Deletar" action="#{pessoaBean.deletar}">
-		     <f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"></f:setPropertyActionListener>
+		  <h:commandLink action="#{pessoaBean.deletar}" title="Excluir">
+		     <f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"/>
+		     <h:graphicImage value="resources/img/btnDeletar.png"/>
 		  </h:commandLink>
 		</h:column>
 		
