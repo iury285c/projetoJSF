@@ -6,7 +6,9 @@
          version="3.1">
 
   <display-name>projetojsf</display-name>
-
+  <welcome-file-list>
+  <welcome-file>index.jsf</welcome-file>
+  </welcome-file-list>
   <listener>
     <listener-class>org.jboss.weld.environment.servlet.Listener</listener-class>
   </listener>
@@ -19,7 +21,7 @@
 
   <servlet-mapping>
   <servlet-name>Faces Servlet</servlet-name>
-  <url-pattern>*.xhtml</url-pattern>
+  <url-pattern>*.jsf</url-pattern>
 </servlet-mapping>
 
 </web-app>
