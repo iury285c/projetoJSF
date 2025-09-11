@@ -48,8 +48,8 @@
 		 <f:selectItem itemValue="FEMININO" itemLabel="Feminino"/>
 		</h:selectOneMenu>
 		
-		<h:outputLabel value="Perfil"/>
-		<h:selectOneMenu id="campoPerfil" value="#{pessoaBean.pessoa.perfilUser}">
+		<h:outputLabel value="Perfil" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
+		<h:selectOneMenu id="campoPerfil" value="#{pessoaBean.pessoa.perfilUser}" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 		<f:selectItem itemLabel="[-Selecione-]" noSelectionOption="true"/>
 		 <f:selectItem itemValue="DEV BACK-END" itemLabel="DEV BACK-END"/>
 		 <f:selectItem itemValue="DEV FRONT-END" itemLabel="DEV FRONT-END"/>
@@ -58,9 +58,9 @@
 		 <f:selectItem itemValue="ADMINISTRADOR" itemLabel="ADMINISTRADOR"/>
 		</h:selectOneMenu>
 		
-		<h:outputLabel value="Frameworks:"/>
+		<h:outputLabel value="Frameworks:" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
 		<h:selectManyMenu id="campoFrameworks" style="height:150px; width:150px;" 
-		 value="#{pessoaBean.pessoa.frameworks}">
+		 value="#{pessoaBean.pessoa.frameworks}" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 		  <f:selectItem itemValue="Hibernate"/>
 		  <f:selectItem itemValue="JSF"/>
 		  <f:selectItem itemValue="Spring MVC"/>
@@ -77,7 +77,7 @@
 		<h:panelGroup>
 		<h:commandButton value="Novo" action="#{pessoaBean.novo}" image="resources/img/btnNovo.png" title="Novo"/>
 		<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" image="resources/img/btnSalvar.png" title="Salvar"/>
-		<h:commandButton value="Deletar" action="#{pessoaBean.deletar}" image="resources/img/btnDeletar.png" title="Excluir"/>
+		<h:commandButton value="Deletar" action="#{pessoaBean.deletar}" image="resources/img/btnDeletar.png" title="Excluir" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
 		<h:commandButton value="Limpar" type="reset" image="resources/img/btnLimpar.png" title="Limpar"/>
 		</h:panelGroup>
 		
@@ -110,20 +110,20 @@
 		   <f:facet name="header">SEXO</f:facet>
 		   <h:outputText value="#{pessoa.sexo}"></h:outputText>
 		</h:column>
-		<h:column>
+		<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 		   <f:facet name="header">FRAMEWORKS</f:facet>
 		   <h:outputText value="#{pessoa.frameworks}"></h:outputText>
 		</h:column>
-		<h:column>
+		<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 		   <f:facet name="header">PERFIL</f:facet>
 		   <h:outputText value="#{pessoa.perfilUser}"></h:outputText>
 		</h:column>
-		<h:column>
+		<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 		   <f:facet name="header">ATIVO</f:facet>
 		   <h:outputText value="#{pessoa.ativo}"></h:outputText>
 		</h:column>
 		
-		<h:column>
+		<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 		  <f:facet name="header">EDITAR</f:facet>
 		  <h:commandLink title="Editar">
 		     <f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"/>
