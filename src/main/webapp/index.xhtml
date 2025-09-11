@@ -15,10 +15,10 @@
  <h:panelGrid columns="2"> 
  
  <h:outputLabel value="LOGIN"/>
- <h:inputText/>
+ <h:inputText value="#{pessoaBean.pessoa.login}"/>
  
  <h:outputLabel value="SENHA"/>
- <h:inputSecret/>
+ <h:inputSecret value="#{pessoaBean.pessoa.senha}"/>
  
  <h:commandButton value="Logar" action="#{pessoaBean.logar}"/>
  </h:panelGrid>
