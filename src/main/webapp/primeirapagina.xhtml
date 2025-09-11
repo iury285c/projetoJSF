@@ -34,6 +34,12 @@
 		<h:outputLabel value="IDADE"/>
 		<h:inputText id="idade" value="#{pessoaBean.pessoa.idade}"></h:inputText>
 		
+		<h:outputLabel value="LOGIN"/>
+		<h:inputText id="login" value="#{pessoaBean.pessoa.login}"></h:inputText>
+		
+		<h:outputLabel value="SENHA"/>
+		<h:inputSecret id="senha" value="#{pessoaBean.pessoa.senha}"/>
+		
 		
 		<h:outputLabel value="sexo"/>
 		<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}">
