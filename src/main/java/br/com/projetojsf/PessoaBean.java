@@ -78,7 +78,8 @@ public class PessoaBean implements Serializable  {
 	public boolean permiteAcesso(String acesso) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = context.getExternalContext();
-		Pessoa pessoaUserPessoa =  (Pessoa) externalContext.getApplicationMap().get("ususarioLogado");
-		return pessoaUserPessoa.getPerfilUser().equals(acesso);
+		Pessoa pessoaUser = (Pessoa) externalContext.getSessionMap().get("ususarioLogado");
+		
+		return pessoaUser.getPerfilUser().equals(acesso);
 	}
 }
