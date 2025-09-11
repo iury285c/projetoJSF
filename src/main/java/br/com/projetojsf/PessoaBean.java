@@ -69,7 +69,7 @@ public class PessoaBean implements Serializable  {
 			
 			FacesContext context = FacesContext.getCurrentInstance();
 			ExternalContext externalContext = context.getExternalContext();
-			externalContext.getSessionMap().put("ususarioLogado", pessoaUser.getLogin());
+			externalContext.getSessionMap().put("ususarioLogado", pessoaUser);
 			return "primeirapagina.jsf";
 		}
 		return "index.jsf";

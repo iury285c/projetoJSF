@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import br.com.entidade.Pessoa;
 import br.com.jpautil.JPAUtil;
 
 
@@ -31,10 +32,10 @@ public class FilterAutenticacao implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpSession session = req.getSession();
-		String usuarioLogado = (String) session.getAttribute("usuarioLogado");
+		Pessoa usuarioLogado = (Pessoa) session.getAttribute("usuarioLogado");
 		String url = req.getServletPath();
 		if (!url.equalsIgnoreCase("index.jsf") && usuarioLogado == null ||
-			(usuarioLogado != null && usuarioLogado.trim().isEmpty())) {
+			(usuarioLogado != null)) {
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsf");
 			dispatcher.forward(request, response);
 			return;
