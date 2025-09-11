@@ -130,7 +130,7 @@
 		     <h:graphicImage value="resources/img/btnEditar.png"/>
 		  </h:commandLink>
 		</h:column>
-		<h:column>
+		<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 		  <f:facet name="header">DELETAR</f:facet>
 		  <h:commandLink action="#{pessoaBean.deletar}" title="Excluir">
 		     <f:setPropertyActionListener value="#{pessoa}" target="#{pessoaBean.pessoa}"/>
