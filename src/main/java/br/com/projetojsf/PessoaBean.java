@@ -57,4 +57,8 @@ public class PessoaBean implements Serializable  {
 	public void carregarPessoas() {
 		pessoas = daoGeneric.getListENtity(Pessoa.class);
 	}
+	
+	public String logar() {
+		return "index.jsf";
+	}
 }
