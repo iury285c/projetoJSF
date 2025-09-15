@@ -75,6 +75,12 @@
 		   <f:facet name="header">Destino</f:facet>
 		   <h:outputText value="#{lancamento.empresaDestino}"></h:outputText>
 		</h:column>
+		<h:column>
+		   <f:facet name="header">ID</f:facet>
+		   <h:outputText value="#{lancamento.usuario.nome}"></h:outputText>
+		</h:column>
+		
+		
 		
 		<h:column rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 		  <f:facet name="header">EDITAR</f:facet>

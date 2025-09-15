@@ -37,7 +37,7 @@ public class LancamentoBean implements Serializable {
 		Pessoa pessoaUser = (Pessoa) externalContext.getSessionMap().get("ususarioLogado");
 		
 		lancamento.setUsuario(pessoaUser);
-		daoGeneric.salvar(lancamento);
+		daoGeneric.merge(lancamento);
 	}
 	
 	public void novo() {
@@ -50,7 +50,6 @@ public class LancamentoBean implements Serializable {
 		lancamento = new Lancamento();
 		carregarLancamento();
 	}
-	
 	
 	public Lancamento getLancamento() {
 		return lancamento;
