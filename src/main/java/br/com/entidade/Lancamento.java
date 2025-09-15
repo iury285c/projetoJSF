@@ -21,8 +21,8 @@ public class Lancamento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	private String numeroNotaFiscal;
-	private String empreaOrigem;
-	private String empreaDestino;
+	private String empresaOrigem;
+	private String empresaDestino;
 	@ManyToOne(optional = false)
 	@ForeignKey(name = "ususario_fk")
 	private Pessoa usuario;
@@ -38,17 +38,17 @@ public class Lancamento implements Serializable {
 	public void setNumeroNotaFiscal(String numeroNotaFiscal) {
 		this.numeroNotaFiscal = numeroNotaFiscal;
 	}
-	public String getEmpreaOrigem() {
-		return empreaOrigem;
+	public String getEmpresaOrigem() {
+		return empresaOrigem;
 	}
-	public void setEmpreaOrigem(String empreaOrigem) {
-		this.empreaOrigem = empreaOrigem;
+	public void setEmpresaOrigem(String empreaOrigem) {
+		this.empresaOrigem = empreaOrigem;
 	}
-	public String getEmpreaDestino() {
-		return empreaDestino;
+	public String getEmpresaDestino() {
+		return empresaDestino;
 	}
-	public void setEmpreaDestino(String empreaDestino) {
-		this.empreaDestino = empreaDestino;
+	public void setEmpresaDestino(String empreaDestino) {
+		this.empresaDestino = empreaDestino;
 	}
 	public Pessoa getUsuario() {
 		return usuario;
