@@ -4,9 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
 
 import br.com.dao.DaoGeneric;
 import br.com.entidade.Pessoa;
@@ -27,16 +29,24 @@ public class PessoaBean implements Serializable  {
 	public void salvar() {
 		pessoa = daoGeneric.merge(pessoa);
 		carregarPessoas();
+		mostrarMsg("Cadastrado com sucesso!");
 	}
 	
 	public void novo() {
 		pessoa = new Pessoa();
 	}
 	
+	public void limpar() {
+		Long idExustente = pessoa.getId();
+		pessoa = new Pessoa();
+		pessoa.setId(idExustente);
+	}
+	
 	public void deletar() {
 		daoGeneric.deletePorId(pessoa);
 		pessoa = new Pessoa();
 		carregarPessoas();
+		mostrarMsg("Excluido com sucesso!");
 	}
 
 	public Pessoa getPessoa() {
@@ -81,5 +91,15 @@ public class PessoaBean implements Serializable  {
 		Pessoa pessoaUser = (Pessoa) externalContext.getSessionMap().get("ususarioLogado");
 		
 		return pessoaUser.getPerfilUser().equals(acesso);
+	}
+	
+	private void mostrarMsg(String msg) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		FacesMessage message = new FacesMessage(msg);
+		context.addMessage(null, message);
+	}
+	
+	public void pesquisacep(AjaxBehaviorEvent event) {
+		
 	}
 }
