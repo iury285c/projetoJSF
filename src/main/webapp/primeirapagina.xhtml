@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 
@@ -13,24 +14,12 @@
 
 <h:body>
 
-     <h:form>
-     
-     <h:commandLink title="Administração" action="lancamento" style="margin-left:1cm;">
-     <h:graphicImage value="resources\img\btnAdministracao.png"/>
-     </h:commandLink>
-     <h:commandLink title="Cadastro de Usuario" action="primeirapagina" style="margin-left:1cm;">
-     <h:graphicImage value="resources\img\btnCadastro.png"/>
-     </h:commandLink>
-     
-     <h:commandLink  title ="Trocar de Usuario" action="index" style="margin-left:1cm;">
-     <h:graphicImage value="resources\img\troca-de-usuario.png"/>
-    </h:commandLink>
-
-     </h:form>
-     
+    <ui:include src="/menu.xhtml"></ui:include>
      
      
 	<h:form id="formPessoa">
+	
+	<h:messages/>
 	
 	   <h:graphicImage height="80" width="80" library="img" name="imagemjv.png" />
 	
@@ -41,23 +30,33 @@
 	    <h:inputText id="campoId" value="#{pessoaBean.pessoa.id}" readonly="true"></h:inputText>
 	    
 	    <h:outputLabel value="NOME"/>
-		<h:inputText id="campoNome" value="#{pessoaBean.pessoa.nome}"></h:inputText>
+		<h:inputText id="campoNome" value="#{pessoaBean.pessoa.nome}" required="true">
+		 <f:validateLength minimum="4" maximum="20"/>
+		</h:inputText>
 		
         <h:outputLabel value="SOBRENOME"/>
-		<h:inputText id="sobrenome" value="#{pessoaBean.pessoa.sobrenome}"></h:inputText>
+		<h:inputText id="sobrenome" value="#{pessoaBean.pessoa.sobrenome}" required="true"></h:inputText>
+		
+		<h:outputLabel value="Data de Nascimento:"/>
+		<h:inputText value="#{pessoaBean.pessoa.dataNascimento}" required="true">
+		<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR" timeZone="GMT-03:00"/>
+		</h:inputText>
 		
 		<h:outputLabel value="IDADE"/>
-		<h:inputText id="idade" value="#{pessoaBean.pessoa.idade}"></h:inputText>
+		<h:inputText id="idade" value="#{pessoaBean.pessoa.idade}" required="true"
+		  requiredMessage="Idade invalida, Informe a idade!" validatorMessage="Idade minima para se cadastrar é 18 anos">
+		<f:validateLongRange minimum="18" maximum="999" />
+		</h:inputText>
 		
 		<h:outputLabel value="LOGIN"/>
-		<h:inputText id="login" value="#{pessoaBean.pessoa.login}"></h:inputText>
+		<h:inputText id="login" value="#{pessoaBean.pessoa.login}" required="true"></h:inputText>
 		
 		<h:outputLabel value="SENHA"/>
-		<h:inputSecret id="senha" value="#{pessoaBean.pessoa.senha}"/>
+		<h:inputSecret id="senha" value="#{pessoaBean.pessoa.senha}" required="true"/>
 		
 		
 		<h:outputLabel value="sexo"/>
-		<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}">
+		<h:selectOneMenu id="campoSexo" value="#{pessoaBean.pessoa.sexo}" required="true">
 		<f:selectItem itemLabel="[-Selecione-]" noSelectionOption="true"/>
 		 <f:selectItem itemValue="MASCULINO" itemLabel="Masculino"/>
 		 <f:selectItem itemValue="FEMININO" itemLabel="Feminino"/>
@@ -73,7 +72,7 @@
 		 <f:selectItem itemValue="ADMINISTRADOR" itemLabel="ADMINISTRADOR"/>
 		</h:selectOneMenu>
 		
-		<h:outputLabel value="Frameworks:" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
+		<h:outputLabel value="Frameworks:" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}" required="true"/>
 		<h:selectManyMenu id="campoFrameworks" style="height:150px; width:150px;" 
 		 value="#{pessoaBean.pessoa.frameworks}" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}">
 		  <f:selectItem itemValue="Hibernate"/>
@@ -85,21 +84,44 @@
 		  <f:selectItem itemValue="K8S"/>
 		</h:selectManyMenu>
 		
+		<h:outputLabel value="Nivel"/>
+		<h:selectOneRadio value ="#{pessoaBean.pessoa.nivelProgramador}" required="true">
+		  <f:selectItem itemValue="Junior" itemLabel="Junior"/>
+		  <f:selectItem itemValue="Pleno" itemLabel="Pleno"/>
+		  <f:selectItem itemValue="Senior" itemLabel="Senior"/>
+		  <f:selectItem itemValue="Especialista" itemLabel="Especialista"/>
+		</h:selectOneRadio>
+		
+		<h:outputLabel value="Linguagem"/>
+		<h:selectManyCheckbox value="#{pessoaBean.pessoa.linguagem}">
+		<f:selectItem itemValue="1" itemLabel="Java"/>  
+		<f:selectItem itemValue="2" itemLabel="C"/>
+		<f:selectItem itemValue="3" itemLabel="C#"/>
+		<f:selectItem itemValue="4" itemLabel="Assembly"/>
+		<f:selectItem itemValue="5" itemLabel="Smalltalk"/>
+		<f:selectItem itemValue="6" itemLabel="Dart"/>
+		</h:selectManyCheckbox>
+		
 		<h:outputLabel value="Ativo"/>
 		<h:selectBooleanCheckbox value="#{pessoaBean.pessoa.ativo}"/>
 		
 		<h:outputLabel/>
 		<h:panelGroup>
-		<h:commandButton value="Novo" action="#{pessoaBean.novo}" image="resources/img/btnNovo.png" title="Novo"/>
+		<h:commandButton value="Novo" id="btnNovo" action="#{pessoaBean.novo}" image="resources/img/btnNovo.png" title="Novo">
+		  <f:ajax execute="btnNovo" render="@form"/>
+		</h:commandButton>
 		<h:commandButton value="Salvar" action="#{pessoaBean.salvar}" image="resources/img/btnSalvar.png" title="Salvar"/>
 		<h:commandButton value="Deletar" action="#{pessoaBean.deletar}" image="resources/img/btnDeletar.png" title="Excluir" rendered="#{pessoaBean.permiteAcesso('ADMINISTRADOR')}"/>
-		<h:commandButton value="Limpar" type="reset" image="resources/img/btnLimpar.png" title="Limpar"/>
+		<h:commandButton value="Limpar" id="btnLimpar" action="#{pessoaBean.limpar}" image="resources/img/btnLimpar.png" title="Limpar">
+		  <f:ajax execute="btnLimpar" render="@form"/>
+		</h:commandButton>
 		</h:panelGroup>
 		
 		</h:panelGrid>
 		
+		</h:form>
 		
-		
+		<h:form>
 		<h:dataTable value="#{pessoaBean.pessoas}" var="pessoa" border="4">
 		<f:facet name="header">
 		   Lista de Pessoas Cadastradas
