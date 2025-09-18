@@ -48,11 +48,48 @@
 		<f:validateLongRange minimum="18" maximum="999" />
 		</h:inputText>
 		
-		<h:outputLabel/>
+		<h:outputLabel value="CEP"/>
 		<h:inputText value="#{pessoaBean.pessoa.cep}">
-		<f:ajax event="blur" execute="@this" listener="#{pessoaBean.pesquisacep}"/>
-		
+		<f:ajax event="blur" execute="@this" listener="#{pessoaBean.pesquisacep}"
+		        render="logradouro complemento unidade bairro localidade uf estado regiao ibge gia ddd siafi"/>
 		</h:inputText>
+		
+		<h:outputLabel value="LOGRADOURO"/>
+		<h:inputText/>
+		
+		<h:outputLabel value="COMPLEMENTO"/>
+		<h:inputText/>
+		
+		<h:outputLabel value="UNIDADE"/>
+		<h:inputText/>
+		
+		<h:outputLabel value="BAIRRO"/>
+		<h:inputText/>
+		
+		<h:outputLabel value="LOCALIDADE"/>
+		<h:inputText/>
+		
+		<h:outputLabel value="UF"/>
+		<h:inputText/>
+		
+		<h:outputLabel value="ESTADO"/>
+		<h:inputText/>
+		
+		<h:outputLabel value="REGIÂO"/>
+		<h:inputText/>
+		
+		<h:outputLabel value="IBGE"/>
+		<h:inputText/>
+		
+		<h:outputLabel value="GIA"/>
+		<h:inputText/>
+		
+		<h:outputLabel value="DDD"/>
+		<h:inputText/>
+		
+		<h:outputLabel value="SIAFI"/>
+		<h:inputText/>
+		
 		
 		<h:outputLabel value="LOGIN"/>
 		<h:inputText id="login" value="#{pessoaBean.pessoa.login}" required="true"></h:inputText>
