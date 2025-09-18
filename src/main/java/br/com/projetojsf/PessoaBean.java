@@ -15,6 +15,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
+import com.google.gson.Gson;
+
 import br.com.dao.DaoGeneric;
 import br.com.entidade.Pessoa;
 import br.com.repository.IDaoPessoa;
@@ -114,9 +116,22 @@ public class PessoaBean implements Serializable  {
 			StringBuilder jsoncep = new StringBuilder();
 			
 			while ((cep = br.readLine()) != null) {
-				jsoncep.append(cep);
-				
+				jsoncep.append(cep);	
 			}
+			Pessoa gsonAux = new Gson().fromJson(jsoncep.toString(), Pessoa.class);
+			pessoa.setCep(gsonAux.getCep());
+			pessoa.setLogradouro(gsonAux.getLogradouro());
+			pessoa.setComplemento(gsonAux.getComplemento());
+			pessoa.setUnidade(gsonAux.getUnidade());
+			pessoa.setBairro(gsonAux.getBairro());
+			pessoa.setLocalidade(gsonAux.getLocalidade());
+			pessoa.setUf(gsonAux.getUf());
+			pessoa.setEstado(gsonAux.getEstado());
+			pessoa.setRegiao(gsonAux.getRegiao());
+			pessoa.setIbge(gsonAux.getIbge());
+			pessoa.setGia(gsonAux.getGia());
+			pessoa.setDdd(gsonAux.getDdd());
+			pessoa.setSiafi(gsonAux.getSiafi());
 		} catch (Exception e) {
 		 e.printStackTrace();
 		 mostrarMsg("Erro ao consultar CEP");
