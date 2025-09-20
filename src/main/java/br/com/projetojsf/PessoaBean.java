@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.servlet.http.HttpServletRequest;
 
 import com.google.gson.Gson;
 
@@ -92,6 +93,17 @@ public class PessoaBean implements Serializable  {
 		return "index.jsf";
 	}
 	
+	public String deslogar() {
+		
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+		externalContext.getSessionMap().remove("usuarioLogado");
+		HttpServletRequest httpServletRequest = (HttpServletRequest) context.getCurrentInstance().getExternalContext().getRequest();
+		httpServletRequest.getSession().invalidate();
+		
+		return "index.jsf";
+	}
+	
 	public boolean permiteAcesso(String acesso) {
 		FacesContext context = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = context.getExternalContext();
@@ -108,7 +120,7 @@ public class PessoaBean implements Serializable  {
 	
 	public void pesquisacep(AjaxBehaviorEvent event) {
 		try {
-			URL url = new URL("URL: viacep.com.br/ws/"+pessoa.getCep()+"/json/");
+			URL url = new URL("https://viacep.com.br/ws/" + pessoa.getCep() + "/json/");
 			URLConnection connection = url.openConnection();
 			InputStream is = connection.getInputStream();
 			BufferedReader br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
