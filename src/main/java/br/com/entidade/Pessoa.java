@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 @Entity
 public class Pessoa implements Serializable {
@@ -46,7 +47,8 @@ public class Pessoa implements Serializable {
 	private String gia;
 	private String ddd;
 	private String siafi;
-	
+	@Transient
+	private Estados estados;
 	
 	public Pessoa() {
 		
@@ -81,31 +83,24 @@ public class Pessoa implements Serializable {
 	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
-	
 	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
-	
 	public String getSexo() {
 		return sexo;
 	}
-	
 	public void setFrameworks(String[] frameworks) {
 		this.frameworks = frameworks;
 	}
-	
 	public String[] getFrameworks() {
 		return frameworks;
 	}
-	
 	public void setAtivo(Boolean ativo) {
 		this.ativo = ativo;
 	}
-	
 	public Boolean getAtivo() {
 		return ativo;
 	}
-	
 	public String getLogin() {
 		return login;
 	}
@@ -136,7 +131,6 @@ public class Pessoa implements Serializable {
 	public void setLinguagem(Integer[] linguagem) {
 		this.linguagem = linguagem;
 	}
-	
 	public String getCep() {
 		return cep;
 	}
@@ -214,6 +208,12 @@ public class Pessoa implements Serializable {
 	}
 	public void setSiafi(String siafi) {
 		this.siafi = siafi;
+	}
+	public Estados getEstados() {
+		return estados;
+	}
+	public void setEstados(Estados estados) {
+		this.estados = estados;
 	}
 	@Override
 	public int hashCode() {
