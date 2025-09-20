@@ -127,6 +127,11 @@
 		  <f:selectItem itemValue="K8S"/>
 		</h:selectManyMenu>
 		
+		<h:outputLabel value="Estados:"/>
+		<h:selectOneMenu value="#{pessoaBean.pessoa.estados}" >
+	       <f:selectItems value="#{pessoaBean.estados}"/>
+		</h:selectOneMenu>
+		
 		<h:outputLabel value="Nivel"/>
 		<h:selectOneRadio value ="#{pessoaBean.pessoa.nivelProgramador}" required="true">
 		  <f:selectItem itemValue="Junior" itemLabel="Junior"/>
