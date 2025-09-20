@@ -14,6 +14,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
+import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
 
 import com.google.gson.Gson;
@@ -148,5 +149,11 @@ public class PessoaBean implements Serializable  {
 		 e.printStackTrace();
 		 mostrarMsg("Erro ao consultar CEP");
 		}
+	}
+	
+	private List<SelectItem> estados;
+	public List<SelectItem> getEstados() {
+		estados = iDaoPessoa.listaEstados();
+		return estados;
 	}
 }
