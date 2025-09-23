@@ -12,7 +12,7 @@ import javax.persistence.EntityTransaction;
 import br.com.entidade.Estados;
 import br.com.jpautil.JPAUtil;
 
-@FacesConverter(forClass = Estados.class)
+@FacesConverter(forClass = Estados.class, value ="estadoConverter")
 public class EstadoConverter implements Converter<Object>, Serializable {
 
 	
