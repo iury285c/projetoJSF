@@ -47,4 +47,10 @@ public class IDaoPessoaImpl implements IDaoPessoa {
 		return selectItems;
 	}
 
+	@Override
+	public List<Pessoa> consultarU(Long codgUser) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
