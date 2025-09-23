@@ -172,7 +172,7 @@ public class PessoaBean implements Serializable  {
 				List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
 				
 				for (Cidades cidade : cidades) {
-					selectItemsCidade.add(new SelectItem(cidade.getId(), cidade.getNome()));
+					selectItemsCidade.add(new SelectItem(cidade, cidade.getNome()));
 					
 				}
 				setCidades(selectItemsCidade);
