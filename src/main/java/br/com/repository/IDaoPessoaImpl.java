@@ -2,29 +2,25 @@ package br.com.repository;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.faces.component.UISelectItems;
 import javax.faces.model.SelectItem;
-import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-
 import br.com.entidade.Estados;
 import br.com.entidade.Pessoa;
+import br.com.jpautil.JPAUtil;
 
 
 
 public class IDaoPessoaImpl implements IDaoPessoa {
 
-	@Inject
-	private EntityManager entityManager;
+	
 	
 	@Override
 	public Pessoa consultarUsuario(String login, String senha) {
 		
 		Pessoa pessoa = null;
 		
-		
+		EntityManager entityManager = JPAUtil.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
 		
@@ -39,13 +35,14 @@ public class IDaoPessoaImpl implements IDaoPessoa {
 	@Override
 	public List<SelectItem> listaEstados() {
 		List<SelectItem> selectItems = new ArrayList<SelectItem>();
+		EntityManager entityManager = JPAUtil.getEntityManager();
 		EntityTransaction entityTransaction = entityManager.getTransaction();
 		entityTransaction.begin();
 		
 		List<Estados> estados = entityManager.createQuery("from Estados").getResultList();
 		
 		for (Estados estado : estados) {
-			selectItems.add(new SelectItem(estado, estado.getNome()));
+			selectItems.add(new SelectItem(estado.getId(), estado.getNome()));
 		}
 		return selectItems;
 	}
