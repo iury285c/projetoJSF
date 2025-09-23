@@ -12,7 +12,7 @@ import javax.persistence.EntityTransaction;
 import br.com.entidade.Cidades;
 import br.com.jpautil.JPAUtil;
 
-@FacesConverter(forClass = Cidades.class)
+@FacesConverter(forClass = Cidades.class, value = "cidadeConverter")
 public class CidadeConverter implements Converter<Object>, Serializable {
 
 	
