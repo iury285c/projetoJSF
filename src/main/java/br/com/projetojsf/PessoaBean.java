@@ -9,6 +9,7 @@ import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.component.html.HtmlSelectOneMenu;
@@ -83,8 +84,13 @@ public class PessoaBean implements Serializable  {
 		return pessoas;
 	}
 	
+	@PostConstruct
 	public void carregarPessoas() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		ExternalContext externalContext = context.getExternalContext();
+		Pessoa pessoaU = (Pessoa) externalContext.getSessionMap().get("ususarioLogado");
 		pessoas = daoGeneric.getListENtity(Pessoa.class);
+		
 	}
 	
 	public String logar() {
@@ -178,6 +184,21 @@ public class PessoaBean implements Serializable  {
 			}
 		}
 	
+	public void editar() {
+		if (pessoa.getCidades() != null) {
+			Estados estado = pessoa.getCidades().getEstados();
+			pessoa.setEstados(estado);;
+			List<Cidades> cidades = JPAUtil.getEntityManager().createQuery("from Cidades where estados.id = " + estado.getId()).getResultList();
+			List<SelectItem> selectItemsCidade = new ArrayList<SelectItem>();
+			
+			for (Cidades cidade : cidades) {
+				selectItemsCidade.add(new SelectItem(cidade, cidade.getNome()));
+				
+			}
+			setCidades(selectItemsCidade);
+		
+		}
+	}
 
 	public List<SelectItem> getCidades() {
 		return cidades;
