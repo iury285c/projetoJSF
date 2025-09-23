@@ -10,4 +10,5 @@ public interface IDaoPessoa {
 
 	Pessoa consultarUsuario(String login, String senha);
 	List<SelectItem> listaEstados();
+	List<Pessoa> consultarU(Long codgUser);
 }
