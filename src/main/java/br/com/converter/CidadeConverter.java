@@ -32,7 +32,14 @@ public class CidadeConverter implements Converter<Object>, Serializable {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object cidades) {
 		
-		return ((Cidades) cidades).getId().toString();
+		if (cidades == null) {
+			return null;
+		}
+		if (cidades instanceof Cidades) {
+			return ((Cidades) cidades).getId().toString();
+		}else {
+			return cidades.toString();
+		}
 	}
 
 }
