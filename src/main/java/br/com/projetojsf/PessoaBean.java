@@ -1,5 +1,8 @@
 package br.com.projetojsf;
 
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -20,8 +23,10 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.SelectItem;
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
+import javax.xml.bind.DatatypeConverter;
 
 import com.google.gson.Gson;
 
@@ -47,7 +52,31 @@ public class PessoaBean implements Serializable  {
 	private List<SelectItem> estados;
 	private Part arquivofoto;
 	
-	public void salvar() {
+	public void salvar() throws IOException {
+		
+		byte[] imagemByte = getByte(arquivofoto.getInputStream());
+		pessoa.setFotoIconBAse64Original(imagemByte);
+		BufferedImage bufferedImage = ImageIO.read(new ByteArrayInputStream(imagemByte));
+		int type = bufferedImage.getType() == 0? BufferedImage.TYPE_INT_ARGB :  bufferedImage.getType();
+		int largura = 200;
+		int altura = 200;
+		
+		BufferedImage resizedImage = new BufferedImage(altura, largura, type);
+		Graphics2D g = resizedImage.createGraphics();
+		g.drawImage(bufferedImage, 0, 0, largura, altura, null);
+		g.dispose();
+		
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		String extensao = arquivofoto.getContentType().split("\\/")[1];
+		ImageIO.write(resizedImage, extensao, baos);
+		
+		String miniImagem = "data" + arquivofoto.getContentType() + ";base64," +
+		                     DatatypeConverter.printBase64Binary(baos.toByteArray());
+		
+		pessoa.setFotoIconBase64(miniImagem);
+		pessoa.setExtensao(extensao);
+		
+		
 		pessoa = daoGeneric.merge(pessoa);
 		carregarPessoas();
 		mostrarMsg("Cadastrado com sucesso!");
