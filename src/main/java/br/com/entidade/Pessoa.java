@@ -61,7 +61,7 @@ public class Pessoa implements Serializable {
 	private String extensao;
 	@Lob
 	@Basic(fetch = FetchType.LAZY)
-	private byte[] fotoIconBAse64Orifinal;
+	private byte[] fotoIconBase64Original;
 	
 	
 	public Pessoa() {
@@ -250,11 +250,11 @@ public class Pessoa implements Serializable {
 	public void setExtensao(String extensao) {
 		this.extensao = extensao;
 	}
-	public byte[] getFotoIconBAse64Orifinal() {
-		return fotoIconBAse64Orifinal;
+	public byte[] getFotoIconBase64Original() {
+		return fotoIconBase64Original;
 	}
-	public void setFotoIconBAse64Orifinal(byte[] fotoIconBAse64Orifinal) {
-		this.fotoIconBAse64Orifinal = fotoIconBAse64Orifinal;
+	public void setFotoIconBAse64Original(byte[] fotoIconBase64Original) {
+		this.fotoIconBase64Original = fotoIconBase64Original;
 	}
 	@Override
 	public int hashCode() {
