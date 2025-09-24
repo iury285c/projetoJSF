@@ -17,7 +17,7 @@
     <ui:include src="/menu.xhtml"></ui:include>
      
      
-	<h:form id="formPessoa">
+	<h:form id="formPessoa" enctype="multipart/form-data">
 	
 	<h:messages/>
 	
@@ -28,6 +28,9 @@
 	    <h:panelGrid columns="2">
 	    <h:outputLabel value="ID"/>
 	    <h:inputText id="campoId" value="#{pessoaBean.pessoa.id}" readonly="true"></h:inputText>
+	    
+	    <h:outputLabel value="Foto:"/>
+	    <h:inputFile id="foto" value="#{pessoaBean.arquivofoto}"></h:inputFile>
 	    
 	    <h:outputLabel value="NOME"/>
 		<h:inputText id="campoNome" value="#{pessoaBean.pessoa.nome}" required="true">
