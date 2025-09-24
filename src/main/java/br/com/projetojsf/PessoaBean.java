@@ -12,8 +12,10 @@ import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.net.URL;
 import java.net.URLConnection;
+import java.security.interfaces.DSAParams;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.application.FacesMessage;
@@ -267,5 +269,10 @@ public class PessoaBean implements Serializable  {
 			buf = boss.toByteArray();
 		}
 		return buf;
+	}
+	
+	public void download () {
+		Map<String, String> parms = FacesContext.getCurrentInstance().getExternalContext().getInitParameterMap();
+		String fileDownloadId = parms.get("fileDownloadId");
 	}
 }
