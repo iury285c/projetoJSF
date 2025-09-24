@@ -1,6 +1,9 @@
 package br.com.projetojsf;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Serializable;
@@ -18,6 +21,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.model.SelectItem;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Part;
 
 import com.google.gson.Gson;
 
@@ -41,6 +45,7 @@ public class PessoaBean implements Serializable  {
 	private IDaoPessoa iDaoPessoa = new IDaoPessoaImpl();
 	private List<SelectItem> cidades;
 	private List<SelectItem> estados;
+	private Part arquivofoto;
 	
 	public void salvar() {
 		pessoa = daoGeneric.merge(pessoa);
@@ -207,6 +212,31 @@ public class PessoaBean implements Serializable  {
 	public void setCidades(List<SelectItem> cidades) {
 		this.cidades = cidades;
 	}
+
+	public Part getArquivofoto() {
+		return arquivofoto;
+	}
+
+	public void setArquivofoto(Part arquivofoto) {
+		this.arquivofoto = arquivofoto;
+	}
 	
-	
+	private byte[] getByte (InputStream is) throws IOException {
+		int len;
+		int size = 1024;
+		byte[] buf = null;
+		if (is instanceof ByteArrayInputStream) {
+			size = is.available();
+			buf = new byte[size];
+			len = is.read(buf, 0, size);
+		}else {
+			ByteArrayOutputStream boss = new ByteArrayOutputStream();
+			buf = new byte[size];
+			while ((len = is.read(buf, 0, size)) != -1) {
+				boss.write(buf, 0, len);
+			}
+			buf = boss.toByteArray();
+		}
+		return buf;
+	}
 }
